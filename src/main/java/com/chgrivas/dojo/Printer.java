@@ -1,5 +1,5 @@
 package com.chgrivas.dojo;
 
 public interface Printer {
-  String print();
+  void println(String string);
 }

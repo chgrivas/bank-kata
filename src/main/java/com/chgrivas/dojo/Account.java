@@ -12,8 +12,11 @@ public class Account {
     transactionRepository.save(amount);
   }
 
+  public void withdraw(int amount) {
+    transactionRepository.save(-amount);
+  }
 
   public void printStatements(Printer printer) {
-    printer.println("date || credit || debit || balance");
+    printer.print(transactionRepository.getAll());
   }
 }

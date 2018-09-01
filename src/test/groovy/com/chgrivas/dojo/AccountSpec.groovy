@@ -6,11 +6,13 @@ import spock.lang.Specification
 class AccountSpec extends Specification {
 
   Printer mockPrinter
+  TransactionRepository mockTransactionRepository
   Account account
 
   def setup() {
+    mockTransactionRepository = Mock(TransactionRepository)
     mockPrinter = Mock(Printer)
-    account = new Account()
+    account = new Account(mockTransactionRepository)
   }
 
   def "Print statemets prints the title in the beginning"() {
@@ -20,10 +22,10 @@ class AccountSpec extends Specification {
       1 * mockPrinter.println("date || credit || debit || balance")
   }
 
-  def "A deposit of 1000 can be handled"() {
+  def "A deposit of 1000 is persisted"() {
     when:
       account.deposit(1000)
     then:
-      noExceptionThrown()
+      1 * mockTransactionRepository.save(1000)
   }
 }

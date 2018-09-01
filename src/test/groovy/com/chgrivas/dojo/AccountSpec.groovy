@@ -19,4 +19,11 @@ class AccountSpec extends Specification {
     then:
       1 * mockPrinter.println("date || credit || debit || balance")
   }
+
+  def "A deposit of 1000 can be handled"() {
+    when:
+      account.deposit(1000)
+    then:
+      noExceptionThrown()
+  }
 }
